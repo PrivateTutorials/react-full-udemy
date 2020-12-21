@@ -1,17 +1,22 @@
+// Import React and ReactDOM libs
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// Create a react component
+const App = () => {
+    // if jsx is not on the same line with return, then you need to use "( )"
+    return (
+        <div>
+            <label className="label" htmlFor="name">Enter name:</label>
+            <input id="name" type="text"/>
+            <button style={{backgroundColor: 'blue', color: 'white'}}>Submit</button>
+        </div>
+    );
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//  return <div>Hi There!</div> // this is jsx
+//  In Babel it will look like this:
+//  return React.createElement("div", null, "Hi There!");
+
+// Take react component and show it on screen
+ReactDOM.render(<App/>, document.querySelector('#root'));
