@@ -1,30 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CommentDetail from './CommentDetail';
-import ApprovalCard from './ApprovalCard';
 
-const App = () => {
-    return (
-        <div className="ui container comments">
-            <ApprovalCard>
-                <CommentDetail
-                    author="Sam"
-                    timeAgo="Today at 4:45 PM"
-                    commentText="First post"
-                />
-            </ApprovalCard>
-            <CommentDetail
-                author="Igor"
-                timeAgo="Today at 3:00 PM"
-                commentText="Second post"
-            />
-            <CommentDetail
-                author="John"
-                timeAgo="Yesterday at 5:00 PM"
-                commentText="Third post"
-            />
-        </div>
-    );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            latitude: null,
+            errorMessage: ''
+        };
+
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const {latitude} = position.coords;
+                // setState comes from React.Component
+                this.setState({latitude});
+            },
+            (err) => {
+                console.log(err);
+                this.setState({errorMessage: err.message})
+            }
+        );
+    }
+
+    // render() f() is required for any react class component
+    render() {
+        return (
+            <div>
+                <p>Latitude: {this.state.latitude}</p>
+                <p>Error: {this.state.errorMessage}</p>
+            </div>
+        )
+    }
 }
 
 ReactDOM.render(<App/>, document.querySelector('#root'));
