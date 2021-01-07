@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
-import Spinner from './Spenner';
+import Spinner from './Spinner';
 
 // another way to add semantic ui, except having it in index.html is:
 // npm install semantic-ui-css
