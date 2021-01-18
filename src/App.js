@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {Translate} from "./Translate";
+import {Accordion} from "./Accordion";
+import {Search} from "./Search";
 import {Dropdown} from "./Dropdown";
 
 const items = [
@@ -22,22 +25,51 @@ const options = [
     {label: 'Blue color', value: 'blue'}
 ]
 
+const showAccordion = () => {
+    if (window.location.pathname === '/') {
+        return <Accordion items={items}/>
+    }
+}
+
+const showList = () => {
+    if (window.location.pathname === '/list') {
+        return <Search/>
+    }
+}
+
+const showDropdown = () => {
+    if (window.location.pathname === '/dropdown') {
+        return <Dropdown/>
+    }
+}
+
+const showTranslate = () => {
+    if (window.location.pathname === '/translate') {
+        return <Translate/>
+    }
+}
+
 export const App = () => {
-    const [selected, setSelected] = useState(options[0]);
-    const [showDropdown, setShowDropdown] = useState(true);
 
     return (
         <div>
-            <button onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-            {
-                showDropdown ?
-                    <Dropdown
-                        options={options}
-                        selected={selected}
-                        onSelectedChange={setSelected} // convention: on smth set - onSelectedChange
-                    />
-                    : null
-            }
+            {showAccordion()}
+            {showList()}
+            {showDropdown()}
+            {showTranslate()}
         </div>
     )
 }
+
+
+// Toggling dropdown:
+/*
+{
+    showDropdown ?
+        <Dropdown
+            options={options}
+            selected={selected}
+            onSelectedChangeHandler={setSelected} // convention: on smth set - onSelectedChange
+        />
+        : null
+}*/

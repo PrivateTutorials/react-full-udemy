@@ -13,7 +13,7 @@ export class App extends React.Component {
         const response = await axiosUnsplashClient.get('/search/photos', {
             params: {
                 query: searchTerm // the same as "/search/photos?query=searchTerm"
-            }
+            },
         });
 
         this.setState({images: response.data.results});

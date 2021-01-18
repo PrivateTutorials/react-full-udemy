@@ -1,12 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-export const Dropdown = ({options, selected, onSelectedChange}) => {
+export const Dropdown = ({options, selected, onSelectedChangeHandler, label}) => {
     const [openedState, setOpenedState] = useState(false);
     const formRef = useRef();
 
     useEffect(() => {
         const onBodyClick = (event) => {
-            console.log('CLIKC');
             if (formRef.current && formRef.current.contains(event.target)) {
                 return;
             }
@@ -24,12 +23,12 @@ export const Dropdown = ({options, selected, onSelectedChange}) => {
 
     const renderedOptions = options.map(option => {
         if (option.value === selected.value) {
-            return null; // don't render anything
+            return null; // don't render anything (already selected option)
         }
         return (
             <div key={option.value}
                  className="item"
-                 onClick={() => onSelectedChange(option)}>
+                 onClick={() => onSelectedChangeHandler(option)}>
                 {option.label}
             </div>
         );
@@ -38,7 +37,7 @@ export const Dropdown = ({options, selected, onSelectedChange}) => {
     return (
         <div ref={formRef} className="ui form">
             <div className="field">
-                <label className="label">Select color:</label>
+                <label className="label">{label}</label>
                 <div className={`ui selection dropdown ${openedState ? 'visible active' : ''}`}
                      onClick={() => setOpenedState(!openedState)}
                 >
