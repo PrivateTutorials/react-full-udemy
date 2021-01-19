@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Translate} from "./Translate";
 import {Accordion} from "./Accordion";
 import {Search} from "./Search";
 import {Dropdown} from "./Dropdown";
+import {Route} from "./Route";
+import {Header} from "./Header";
 
 const items = [
     {
@@ -25,38 +27,33 @@ const options = [
     {label: 'Blue color', value: 'blue'}
 ]
 
-const showAccordion = () => {
-    if (window.location.pathname === '/') {
-        return <Accordion items={items}/>
-    }
-}
-
-const showList = () => {
-    if (window.location.pathname === '/list') {
-        return <Search/>
-    }
-}
-
-const showDropdown = () => {
-    if (window.location.pathname === '/dropdown') {
-        return <Dropdown/>
-    }
-}
-
-const showTranslate = () => {
-    if (window.location.pathname === '/translate') {
-        return <Translate/>
-    }
-}
-
 export const App = () => {
+    const [selected, setSelected] = useState(options[0]);
 
     return (
         <div>
-            {showAccordion()}
-            {showList()}
-            {showDropdown()}
-            {showTranslate()}
+            <Header/>
+            <Route path="/">
+                {/* When 1 component is provided inside another one, then child will be passed as "children" property to outer component */}
+                <Accordion items={items}/>
+            </Route>
+
+            <Route path="/list">
+                <Search/>
+            </Route>
+
+            <Route path="/dropdown">
+                <Dropdown
+                    label="Select Color"
+                    options={options}
+                    selected={selected}
+                    onSelectedChangeHandler={setSelected}
+                />
+            </Route>
+
+            <Route path="/translate">
+                <Translate/>
+            </Route>
         </div>
     )
 }
