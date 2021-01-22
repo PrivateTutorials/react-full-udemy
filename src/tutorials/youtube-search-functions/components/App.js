@@ -2,32 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {SearchBar} from "./SearchBar";
 import {VideoList} from "./VideoList";
 import {VideoDetail} from "./VideoDetail";
-
-import axiosYoutubeClient from '../apis/youtube';
+import {useVideos} from "../hooks/useVideos";
 
 export const App = () => {
-    const [videos, setVideos] = useState([]);
+
     const [selectedVideo, setSelectedVideo] = useState(null);
 
-    // 1-st default search when user opens App, instead of componentDidMount
+    // Custom hook
+    const [videos, search] = useVideos('cars');
+
     useEffect(() => {
-        onTermSubmit('cars');
-    }, []);
-
-    const onTermSubmit = async (searchString) => {
-        const response = await axiosYoutubeClient.get('/search', {
-            params: {
-                q: searchString
-            }
-        });
-
-        setVideos(response.data.items);
-        setSelectedVideo(response.data.items[0]);
-    }
+        setSelectedVideo(videos[0]);
+    }, [videos]);
 
     return (
         <div className="ui container">
-            <SearchBar onFormSubmit={onTermSubmit}/>
+            <SearchBar onFormSubmit={search}/>
             <div className="ui grid">
                 <div className="ui row">
                     <div className="eleven wide column">
