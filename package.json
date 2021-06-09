@@ -14,7 +14,10 @@
     "redux-thunk": "^2.3.0",
     "redux": "^4.0.5",
     "web-vitals": "^0.2.4",
-    "faker": "^5.1.0"
+    "faker": "^5.1.0",
+    "lodash": "^4.17.21",
+    "react-router-dom": "^5.2.0",
+    "redux-form": "^8.3.7"
   },
   "scripts": {
     "start": "PORT=3000 react-scripts start",
