@@ -1,0 +1,14 @@
+{
+  "name": "rtmp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-smtp-server": "node index.js"
+  },
+  "dependencies": {
+    "node-media-server": "^2.2.8"
+  },
+  "author": "",
+  "license": "ISC"
+}
