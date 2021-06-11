@@ -1,34 +1,39 @@
 import React from 'react';
-import {Route, Router, Switch} from "react-router-dom";
+import UserCreate from './UserCreate';
+import LanguageContext from "../contexts/LanguageContext";
+import ColorContext from "../contexts/ColorContext";
 
-import StreamCreate from "./streams/StreamCreate";
-import StreamDelete from "./streams/StreamDelete";
-import StreamEdit from "./streams/StreamEdit";
-import StreamList from "./streams/StreamList";
-import StreamShow from "./streams/StreamShow";
-import {Header} from "./header";
-import history from "../history";
+// initially default context value is initialized
+// then component is initialized and it rewrites default context value via Provider
 
-export const App = () => {
-    return (
-        <div className="ui container">
-            {/*BrowserRouter - actual react Component. Was used before, when we were not required to make our own "history" obj*/}
-            <Router history={history}>
-                <div>
-                    <Header/>
-                    {/*
-                    react router WON'T show only 1-st matching route. It'll show all of them, 1 by 1
-                    In order to show only 1-st match - we need to use <Switch>
-                    */}
-                    <Switch>
-                        <Route path="/" exact component={StreamList}/>
-                        <Route path="/streams/new" component={StreamCreate}/>
-                        <Route path="/streams/edit/:id" component={StreamEdit}/>
-                        <Route path="/streams/delete/:id" component={StreamDelete}/>
-                        <Route path="/streams/:id" component={StreamShow}/>
-                    </Switch>
+// If Child component, that uses context, is declared without Provider wrapper,
+// then it'll be always using default value from Context
+
+class App extends React.Component {
+    state = {
+        language: 'english'
+    }
+
+    onLanguageChange = (language) => {
+        this.setState({language})
+    }
+
+    render() {
+        return (
+            <div className="ui container">
+                <div>Select a language:
+                    <i className="flag us" onClick={() => this.onLanguageChange('english')}/>
+                    <i className="flag nl" onClick={() => this.onLanguageChange('dutch')}/>
                 </div>
-            </Router>
-        </div>
-    )
+                {/*value - value, that I want to put inside my Context Object*/}
+                <ColorContext.Provider value="red">
+                    <LanguageContext.Provider value={this.state.language}>
+                        <UserCreate/>
+                    </LanguageContext.Provider>
+                </ColorContext.Provider>
+            </div>
+        )
+    }
 }
+
+export default App;
