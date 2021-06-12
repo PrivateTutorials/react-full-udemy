@@ -1,7 +1,9 @@
 import React from 'react';
+
 import UserCreate from './UserCreate';
-import LanguageContext from "../contexts/LanguageContext";
+import {LanguageStore} from "../contexts/LanguageContext";
 import ColorContext from "../contexts/ColorContext";
+import LanguageSelector from "./LanguageSelector";
 
 // initially default context value is initialized
 // then component is initialized and it rewrites default context value via Provider
@@ -10,27 +12,17 @@ import ColorContext from "../contexts/ColorContext";
 // then it'll be always using default value from Context
 
 class App extends React.Component {
-    state = {
-        language: 'english'
-    }
-
-    onLanguageChange = (language) => {
-        this.setState({language})
-    }
 
     render() {
         return (
             <div className="ui container">
-                <div>Select a language:
-                    <i className="flag us" onClick={() => this.onLanguageChange('english')}/>
-                    <i className="flag nl" onClick={() => this.onLanguageChange('dutch')}/>
-                </div>
-                {/*value - value, that I want to put inside my Context Object*/}
-                <ColorContext.Provider value="red">
-                    <LanguageContext.Provider value={this.state.language}>
+                <LanguageStore>
+                    <LanguageSelector />
+                    {/*value - value, that I want to put inside my Context Object*/}
+                    <ColorContext.Provider value="red">
                         <UserCreate/>
-                    </LanguageContext.Provider>
-                </ColorContext.Provider>
+                    </ColorContext.Provider>
+                </LanguageStore>
             </div>
         )
     }

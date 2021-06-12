@@ -5,8 +5,8 @@ import ColorContext from "../contexts/ColorContext";
 class Button extends React.Component {
     // Context.Consumer approach
     // we always pass a cb f() as a child to Consumer Component
-    renderSubmit(value) {
-        return value === 'english' ? 'Submit' : 'Voorleggen';
+    renderSubmit(language) {
+        return language === 'english' ? 'Submit' : 'Voorleggen';
     }
 
     render() {
@@ -16,7 +16,7 @@ class Button extends React.Component {
                     <button className={`ui button ${colorValue}`}>
                         <LanguageContext.Consumer>
                             {/*{(value) => value === 'english' ? 'Submit' : 'Voorleggen'}*/}
-                            {(value) => this.renderSubmit(value)}
+                            {(value) => this.renderSubmit(value.language)}
                         </LanguageContext.Consumer>
                     </button>
                 }
