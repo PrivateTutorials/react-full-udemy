@@ -1,9 +1,11 @@
 import React from 'react';
 
 import UserCreate from './UserCreate';
+import LanguageSelector from "./LanguageSelector";
+
 import {LanguageStore} from "../contexts/LanguageContext";
 import ColorContext from "../contexts/ColorContext";
-import LanguageSelector from "./LanguageSelector";
+
 
 // initially default context value is initialized
 // then component is initialized and it rewrites default context value via Provider
@@ -17,8 +19,11 @@ class App extends React.Component {
         return (
             <div className="ui container">
                 <LanguageStore>
-                    <LanguageSelector />
-                    {/*value - value, that I want to put inside my Context Object*/}
+                    <LanguageSelector/>
+                    {/*
+                    Each separate use of ColorContext.Provider creates a new separate 'pipe' of information
+                    value - value, that I want to put inside my Context Object
+                    */}
                     <ColorContext.Provider value="red">
                         <UserCreate/>
                     </ColorContext.Provider>

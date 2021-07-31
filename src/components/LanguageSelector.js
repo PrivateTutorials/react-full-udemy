@@ -2,11 +2,12 @@ import React from 'react';
 import LanguageContext from '../contexts/LanguageContext'
 
 class LanguageSelector extends React.Component {
+    // static contextType - special way to import context inside component. contextType - reserved word
     static contextType = LanguageContext;
 
     render() {
         // this.context - contains both: state and onLanguageChange() f(),
-        // that is provided in value, from Context>Provider
+        // that is provided in value, from Context > Provider
 
         return (
            <div>Select a language:

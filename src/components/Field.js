@@ -21,3 +21,8 @@ class Field extends React.Component {
 }
 
 export default Field;
+
+
+//this.context - is the value, that is provided in context Obj:
+// "english" in example below:
+// const LanguageContext = React.createContext('english');

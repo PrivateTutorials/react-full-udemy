@@ -1,28 +1,28 @@
 import React from 'react';
 
 // english - default value for Context Object
-const Context = React.createContext('english');
+const LanguageContext = React.createContext('english');
 
 export class LanguageStore extends React.Component {
     state = {language: 'english'};
 
-    onLanguageChange = (language) => {
+    onLanguageChangeHandler = (language) => {
         this.setState({language})
     }
 
     render() {
         return (
-            <Context.Provider value={{...this.state, onLanguageChange: this.onLanguageChange}}>
+            <Context.Provider value={{...this.state, onLanguageChange: this.onLanguageChangeHandler}}>
                 {this.props.children}
             </Context.Provider>
         )
     }
 }
 
-export default Context;
+export default LanguageContext;
 
 // now context from here is:
-// value={{...this.state, onLanguageChange: this.onLanguageChange}
+// value={{...this.state, onLanguageChange: this.onLanguageChangeHandler}
 
 
 // All custom components have to be capitalized
