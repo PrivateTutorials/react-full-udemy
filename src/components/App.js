@@ -6,12 +6,14 @@ import LanguageSelector from "./LanguageSelector";
 import {LanguageStore} from "../contexts/LanguageContext";
 import ColorContext from "../contexts/ColorContext";
 
+// to enable tailwind.css scripts
+// import '../styles/output.css';
 
 // initially default context value is initialized
 // then component is initialized and it rewrites default context value via Provider
 
 // If Child component, that uses context, is declared without Provider wrapper,
-// then it'll be always using default value from Context
+// then it'll always be using default value from Context
 
 class App extends React.Component {
 
@@ -34,3 +36,9 @@ class App extends React.Component {
 }
 
 export default App;
+
+// FIELD Class Component
+// In class components context is used with static method:
+// static contextType = LanguageContext;
+// and accessible via "this.context":
+// this.context.language

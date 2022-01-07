@@ -12,9 +12,9 @@ export class LanguageStore extends React.Component {
 
     render() {
         return (
-            <Context.Provider value={{...this.state, onLanguageChange: this.onLanguageChangeHandler}}>
+            <LanguageContext.Provider value={{...this.state, onLanguageChange: this.onLanguageChangeHandler}}>
                 {this.props.children}
-            </Context.Provider>
+            </LanguageContext.Provider>
         )
     }
 }
